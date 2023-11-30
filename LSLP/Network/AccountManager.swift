@@ -53,7 +53,7 @@ final class AccountManager {
         
     }
     
-    func isValidEmail(email: String, completion: @escaping (String) -> Void ) {
+    func isValidEmail(email: String, completion: @escaping (Result<String, inValidEmailError>) -> Void) {
         
         provider.request(.isValidEmail(email: email)) { result in
             switch result {
@@ -63,14 +63,14 @@ final class AccountManager {
                 guard let value = try? JSONDecoder().decode(RequestMessage.self, from: response.data) else {
                     return
                 }
-                completion(value.message)
+                completion(.success(value.message))
             case .failure(let error):
                 print(error)
                 print("error code: ", error.response?.statusCode)
                 if email.isEmpty {
-                    completion(inValidEmailError.inValidInput.rawValue)
+                    completion(.failure(.inValidInput))
                 } else {
-                    completion(inValidEmailError.inValidEmail.rawValue)
+                        completion(.failure(.inValidEmail))
                 }
             }
         }

@@ -25,9 +25,13 @@ final class SignUpViewController: BaseViewController {
     @objc
     private func idCheckButtonPressed() {
         //이메일 유효 통신
-        
-        AccountManager.shared.isValidEmail(email: idTextField.text ?? "") { message in
-            self.showAlert(title: message, message: nil)
+        AccountManager.shared.isValidEmail(email: idTextField.text ?? "") { result in
+            switch result {
+            case .success(let success):
+                self.showAlert(title: success, message: nil)
+            case .failure(let failure):
+                self.showAlert(title: failure.rawValue, message: nil)
+            }
         }
     }
     
