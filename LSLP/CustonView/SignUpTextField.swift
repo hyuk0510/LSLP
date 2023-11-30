@@ -26,6 +26,7 @@ class SignUpTextField: UITextField {
         self.autocapitalizationType = .none
         self.delegate = self
         self.autocorrectionType = .no
+        self.spellCheckingType = .no
     }
     
     override func rightViewRect(forBounds bounds: CGRect) -> CGRect {

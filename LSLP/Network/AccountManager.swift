@@ -17,7 +17,7 @@ enum AccountError: Error {
 }
 
 enum inValidEmailError: String, Error {
-    case inValidInput = "유효하지 않은 이메일 형식입니다."
+    case inValidInput = "이메일을 입력해주세요."
     case inValidEmail = "중복된 아이디입니다."
 }
 
@@ -67,7 +67,7 @@ final class AccountManager {
             case .failure(let error):
                 print(error)
                 print("error code: ", error.response?.statusCode)
-                if !email.contains("@") {
+                if email.isEmpty {
                     completion(inValidEmailError.inValidInput.rawValue)
                 } else {
                     completion(inValidEmailError.inValidEmail.rawValue)

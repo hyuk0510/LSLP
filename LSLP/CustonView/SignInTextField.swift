@@ -24,5 +24,7 @@ final class SignInTextField: UITextField {
         self.layer.borderColor = UIColor.black.cgColor
         self.layer.cornerRadius = 10
         self.autocapitalizationType = .none
+        self.autocorrectionType = .no
+        self.spellCheckingType = .no
     }
 }

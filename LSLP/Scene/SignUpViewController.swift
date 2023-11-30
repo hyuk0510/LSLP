@@ -138,6 +138,7 @@ final class SignUpViewController: BaseViewController {
     var userPW = PublishSubject<String>()
     var userPWCheck = PublishSubject<String>()
     var userNick = PublishSubject<String>()
+    var userPhoneNum = PublishSubject<String>()
     var userBirth = PublishSubject<String>()
     
     var dataCheck = BehaviorSubject(value: false)
@@ -177,37 +178,61 @@ final class SignUpViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        userID
-            .bind(to: idTextField.rx.text)
-            .disposed(by: disposeBag)
-        
-        
-        
         pwTextField.rx.text.orEmpty
             .subscribe(with: self) { owner, value in
                 owner.userPW.onNext(value)
             }
             .disposed(by: disposeBag)
-
-//        
-//        userPW
-//            .subscribe(with: self) { owner, value in
-//                owner.pwTextField.text = value
-//            }
-//            .disposed(by: disposeBag)
-//        
-//        userPWCheck
-//            .subscribe(with: self) { owner, value in
-//                owner.pwCheckTextField.text = value
-//            }
-//            .disposed(by: disposeBag)
-//        
-//        userNick
-//            .subscribe(with: self) { owner, value in
-//                owner.nickTextField.text = value
-//            }
-//            .disposed(by: disposeBag)
         
+        pwCheckTextField.rx.text.orEmpty
+            .subscribe(with: self) { owner, value in
+                owner.userPWCheck.onNext(value)
+            }
+            .disposed(by: disposeBag)
+        
+        nickTextField.rx.text.orEmpty
+            .subscribe(with: self) { owner, value in
+                owner.userNick.onNext(value)
+            }
+            .disposed(by: disposeBag)
+        
+        phoneNumTextField.rx.text.orEmpty
+            .subscribe(with: self) { owner, value in
+                owner.userPhoneNum.onNext(value)
+            }
+            .disposed(by: disposeBag)
+        
+        birthDayTextField.rx.text.orEmpty
+            .subscribe(with: self) { owner, value in
+                owner.userBirth.onNext(value)
+            }
+            .disposed(by: disposeBag)
+        
+        userID
+            .bind(to: idTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        userPW
+            .bind(to: pwTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        userPWCheck
+            .bind(to: pwCheckTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        userNick
+            .bind(to: nickTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        userPhoneNum
+            .bind(to: phoneNumTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        userBirth
+            .bind(to: birthDayTextField.rx.text)
+            .disposed(by: disposeBag)
+
+
         signUpButton.rx.tap
             .subscribe(with: self) { owner, value in
                 owner.checkValidation()
