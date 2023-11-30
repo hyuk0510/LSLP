@@ -28,6 +28,13 @@ class SignUpTextField: UITextField {
         self.autocorrectionType = .no
     }
     
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        var padding = super.rightViewRect(forBounds: bounds)
+        padding.origin.x -= 12
+
+        return padding
+    }
+    
     func insertImage(image: UIImage) {
         let imageView = UIImageView(frame: CGRect(x: 10, y: 5, width: 20, height: 20))
         imageView.image = image

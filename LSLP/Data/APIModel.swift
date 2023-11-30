@@ -29,3 +29,7 @@ struct Token: Decodable {
     let token: String
     let refreshToken: String
 }
+
+struct RequestMessage: Decodable {
+    let message: String
+}

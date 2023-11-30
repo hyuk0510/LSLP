@@ -14,17 +14,11 @@
 		D822B9A52B061B5000371FAC /* LSLPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D822B9A42B061B5000371FAC /* LSLPTests.swift */; };
 		D822B9AF2B061B5000371FAC /* LSLPUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D822B9AE2B061B5000371FAC /* LSLPUITests.swift */; };
 		D822B9B12B061B5000371FAC /* LSLPUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D822B9B02B061B5000371FAC /* LSLPUITestsLaunchTests.swift */; };
-		D822B9BF2B061C4200371FAC /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D822B9BE2B061C4200371FAC /* RxCocoa */; };
-		D822B9C12B061C4200371FAC /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D822B9C02B061C4200371FAC /* RxRelay */; };
-		D822B9C32B061C4200371FAC /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D822B9C22B061C4200371FAC /* RxSwift */; };
 		D822B9C52B061CA700371FAC /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D822B9C42B061CA700371FAC /* .gitignore */; };
 		D822B9C82B061CC600371FAC /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D822B9C72B061CC600371FAC /* APIKey.swift */; };
 		D822B9CA2B0626D100371FAC /* LSLPURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D822B9C92B0626D100371FAC /* LSLPURL.swift */; };
 		D822B9CD2B0627D800371FAC /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D822B9CC2B0627D800371FAC /* SignInViewController.swift */; };
 		D822B9CF2B0627E200371FAC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D822B9CE2B0627E200371FAC /* SignUpViewController.swift */; };
-		D822B9D22B062ACE00371FAC /* LSLPAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D822B9D12B062ACE00371FAC /* LSLPAPI.swift */; };
-		D822B9D52B062D9200371FAC /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = D822B9D42B062D9200371FAC /* Moya */; };
-		D822B9D72B062D9200371FAC /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = D822B9D62B062D9200371FAC /* RxMoya */; };
 		D822B9DA2B062D9D00371FAC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D822B9D92B062D9D00371FAC /* SnapKit */; };
 		D822B9DC2B0630B400371FAC /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D822B9DB2B0630B400371FAC /* APIModel.swift */; };
 		D822B9DE2B06342A00371FAC /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D822B9DD2B06342A00371FAC /* AccountManager.swift */; };
@@ -33,6 +27,15 @@
 		D822B9EA2B08EFB400371FAC /* SignUpTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D822B9E92B08EFB400371FAC /* SignUpTextField.swift */; };
 		D822B9EC2B08FFC000371FAC /* DateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D822B9EB2B08FFC000371FAC /* DateTextField.swift */; };
 		D822B9EF2B09022300371FAC /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D822B9EE2B09022300371FAC /* Date+Extension.swift */; };
+		D822BA902B0F66C100371FAC /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D822BA8F2B0F66C100371FAC /* UIViewController+Extension.swift */; };
+		D822BA9D2B0F986900371FAC /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = D822BA9C2B0F986900371FAC /* Moya */; };
+		D822BA9F2B0F986900371FAC /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = D822BA9E2B0F986900371FAC /* RxMoya */; };
+		D822BAA22B0F9F4300371FAC /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D822BAA12B0F9F4300371FAC /* RxCocoa */; };
+		D822BAA42B0F9F4300371FAC /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = D822BAA32B0F9F4300371FAC /* RxRelay */; };
+		D822BAA62B0F9F4300371FAC /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D822BAA52B0F9F4300371FAC /* RxSwift */; };
+		D822BAAA2B0FA1DB00371FAC /* LSLPAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D822BAA92B0FA1DB00371FAC /* LSLPAPI.swift */; };
+		D822BAB62B1399E800371FAC /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D822BAB52B1399E800371FAC /* Realm */; };
+		D822BAB82B1399E800371FAC /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D822BAB72B1399E800371FAC /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +72,6 @@
 		D822B9C92B0626D100371FAC /* LSLPURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSLPURL.swift; sourceTree = "<group>"; };
 		D822B9CC2B0627D800371FAC /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		D822B9CE2B0627E200371FAC /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		D822B9D12B062ACE00371FAC /* LSLPAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSLPAPI.swift; sourceTree = "<group>"; };
 		D822B9DB2B0630B400371FAC /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
 		D822B9DD2B06342A00371FAC /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		D822B9E42B08E7DF00371FAC /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +79,8 @@
 		D822B9E92B08EFB400371FAC /* SignUpTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTextField.swift; sourceTree = "<group>"; };
 		D822B9EB2B08FFC000371FAC /* DateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTextField.swift; sourceTree = "<group>"; };
 		D822B9EE2B09022300371FAC /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		D822BA8F2B0F66C100371FAC /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		D822BAA92B0FA1DB00371FAC /* LSLPAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSLPAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,12 +88,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D822B9D72B062D9200371FAC /* RxMoya in Frameworks */,
-				D822B9C32B061C4200371FAC /* RxSwift in Frameworks */,
-				D822B9C12B061C4200371FAC /* RxRelay in Frameworks */,
+				D822BAB82B1399E800371FAC /* RealmSwift in Frameworks */,
+				D822BAB62B1399E800371FAC /* Realm in Frameworks */,
+				D822BAA62B0F9F4300371FAC /* RxSwift in Frameworks */,
+				D822BAA42B0F9F4300371FAC /* RxRelay in Frameworks */,
+				D822BA9F2B0F986900371FAC /* RxMoya in Frameworks */,
 				D822B9DA2B062D9D00371FAC /* SnapKit in Frameworks */,
-				D822B9D52B062D9200371FAC /* Moya in Frameworks */,
-				D822B9BF2B061C4200371FAC /* RxCocoa in Frameworks */,
+				D822BAA22B0F9F4300371FAC /* RxCocoa in Frameworks */,
+				D822BA9D2B0F986900371FAC /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,7 +175,7 @@
 		D822B9C62B061CBA00371FAC /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				D822B9D12B062ACE00371FAC /* LSLPAPI.swift */,
+				D822BAA92B0FA1DB00371FAC /* LSLPAPI.swift */,
 				D822B9DD2B06342A00371FAC /* AccountManager.swift */,
 			);
 			path = Network;
@@ -216,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				D822B9EE2B09022300371FAC /* Date+Extension.swift */,
+				D822BA8F2B0F66C100371FAC /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -237,12 +244,14 @@
 			);
 			name = LSLP;
 			packageProductDependencies = (
-				D822B9BE2B061C4200371FAC /* RxCocoa */,
-				D822B9C02B061C4200371FAC /* RxRelay */,
-				D822B9C22B061C4200371FAC /* RxSwift */,
-				D822B9D42B062D9200371FAC /* Moya */,
-				D822B9D62B062D9200371FAC /* RxMoya */,
 				D822B9D92B062D9D00371FAC /* SnapKit */,
+				D822BA9C2B0F986900371FAC /* Moya */,
+				D822BA9E2B0F986900371FAC /* RxMoya */,
+				D822BAA12B0F9F4300371FAC /* RxCocoa */,
+				D822BAA32B0F9F4300371FAC /* RxRelay */,
+				D822BAA52B0F9F4300371FAC /* RxSwift */,
+				D822BAB52B1399E800371FAC /* Realm */,
+				D822BAB72B1399E800371FAC /* RealmSwift */,
 			);
 			productName = LSLP;
 			productReference = D822B98A2B061B4F00371FAC /* LSLP.app */;
@@ -317,9 +326,10 @@
 			);
 			mainGroup = D822B9812B061B4F00371FAC;
 			packageReferences = (
-				D822B9BD2B061C4200371FAC /* XCRemoteSwiftPackageReference "RxSwift" */,
-				D822B9D32B062D9200371FAC /* XCRemoteSwiftPackageReference "Moya" */,
 				D822B9D82B062D9D00371FAC /* XCRemoteSwiftPackageReference "SnapKit" */,
+				D822BA9B2B0F986900371FAC /* XCRemoteSwiftPackageReference "Moya" */,
+				D822BAA02B0F9F4300371FAC /* XCRemoteSwiftPackageReference "RxSwift" */,
+				D822BAB42B1399E800371FAC /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = D822B98B2B061B4F00371FAC /* Products */;
 			projectDirPath = "";
@@ -365,9 +375,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D822B9CF2B0627E200371FAC /* SignUpViewController.swift in Sources */,
-				D822B9D22B062ACE00371FAC /* LSLPAPI.swift in Sources */,
 				D822B98E2B061B4F00371FAC /* AppDelegate.swift in Sources */,
+				D822BA902B0F66C100371FAC /* UIViewController+Extension.swift in Sources */,
 				D822B9EA2B08EFB400371FAC /* SignUpTextField.swift in Sources */,
+				D822BAAA2B0FA1DB00371FAC /* LSLPAPI.swift in Sources */,
 				D822B9CD2B0627D800371FAC /* SignInViewController.swift in Sources */,
 				D822B9DC2B0630B400371FAC /* APIModel.swift in Sources */,
 				D822B9E52B08E7DF00371FAC /* BaseViewController.swift in Sources */,
@@ -716,22 +727,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D822B9BD2B061C4200371FAC /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.6.0;
-			};
-		};
-		D822B9D32B062D9200371FAC /* XCRemoteSwiftPackageReference "Moya" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Moya/Moya.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 15.0.3;
-			};
-		};
 		D822B9D82B062D9D00371FAC /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -740,38 +735,72 @@
 				minimumVersion = 5.6.0;
 			};
 		};
+		D822BA9B2B0F986900371FAC /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+		D822BAA02B0F9F4300371FAC /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.6.0;
+			};
+		};
+		D822BAB42B1399E800371FAC /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D822B9BE2B061C4200371FAC /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D822B9BD2B061C4200371FAC /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxCocoa;
-		};
-		D822B9C02B061C4200371FAC /* RxRelay */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D822B9BD2B061C4200371FAC /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxRelay;
-		};
-		D822B9C22B061C4200371FAC /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D822B9BD2B061C4200371FAC /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
-		D822B9D42B062D9200371FAC /* Moya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D822B9D32B062D9200371FAC /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = Moya;
-		};
-		D822B9D62B062D9200371FAC /* RxMoya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D822B9D32B062D9200371FAC /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = RxMoya;
-		};
 		D822B9D92B062D9D00371FAC /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D822B9D82B062D9D00371FAC /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		D822BA9C2B0F986900371FAC /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D822BA9B2B0F986900371FAC /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		D822BA9E2B0F986900371FAC /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D822BA9B2B0F986900371FAC /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
+		};
+		D822BAA12B0F9F4300371FAC /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D822BAA02B0F9F4300371FAC /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		D822BAA32B0F9F4300371FAC /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D822BAA02B0F9F4300371FAC /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		D822BAA52B0F9F4300371FAC /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D822BAA02B0F9F4300371FAC /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		D822BAB52B1399E800371FAC /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D822BAB42B1399E800371FAC /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		D822BAB72B1399E800371FAC /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D822BAB42B1399E800371FAC /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
