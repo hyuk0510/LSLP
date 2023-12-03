@@ -129,12 +129,14 @@ final class SignUpViewController: BaseViewController {
         
         view.backgroundColor = .white
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backButtonPressed))
+        self.navigationItem.leftBarButtonItem?.tintColor = .black
         self.title = "회원가입"
         bind()
     }
     
     @objc
     private func backButtonPressed() {
+        
         navigationController?.popViewController(animated: true)
     }
     
@@ -145,6 +147,7 @@ final class SignUpViewController: BaseViewController {
     var userPhoneNum = PublishSubject<String>()
     var userBirth = PublishSubject<String>()
     
+    var isAnyInput = BehaviorSubject(value: false)
     var dataCheck = BehaviorSubject(value: false)
     var pwCheck = BehaviorSubject(value: false)
     
@@ -278,15 +281,24 @@ final class SignUpViewController: BaseViewController {
     private func signUp() {
         AccountManager.shared.signUp(email: idTextField.text ?? "", password: pwTextField.text ?? "", nick: nickTextField.text ?? "", phoneNum: phoneNumTextField.text ?? "", birthDay: birthDayTextField.text ?? "") { response in
             switch response {
-            case .success(let success):
-//                UserDefaults.standard.setValue(success.email, forKey: "UserID")
-//                UserDefaults.standard.setValue(success.nick, forKey: "UserNick")
-                print(success)
+            case .success(_):
+                self.finishSignUp()
                 
             case .failure(let failure):
-                print(failure)
+                self.showAlert(title: failure.rawValue, message: nil)
             }
         }
+    }
+    
+    private func finishSignUp() {
+        let alert = UIAlertController(title: "회원가입이 완료되었습니다.", message: nil, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style: .cancel) { _ in
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        alert.addAction(ok)
+        
+        present(alert, animated: true)
     }
     
     override func configure() {

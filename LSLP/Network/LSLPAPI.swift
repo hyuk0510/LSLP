@@ -19,7 +19,7 @@ enum LSLPAPI {
     case signUp(model: Account)
     case isValidEmail(email: String)
     case signIn(email: String, password: String)
-    case refreshToken(refreshToken: String, token: String)
+    case refreshToken(token: String, refreshToken: String)
     case withdraw(token: String)
     
 }
@@ -78,7 +78,7 @@ extension LSLPAPI: TargetType {
                 "SesacKey" : "\(APIKey.key)"
             ]
        
-        case .refreshToken(let refreshToken, let token):
+        case .refreshToken(let token, let refreshToken):
             return [
                 "Authorization" : "\(token)",
                 "Refresh" : "\(refreshToken)",

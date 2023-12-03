@@ -26,6 +26,7 @@ struct SignUpResponse: Decodable {
 }
 
 struct Token: Decodable {
+    let _id: String
     let token: String
     let refreshToken: String
 }

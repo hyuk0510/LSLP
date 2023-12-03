@@ -11,9 +11,9 @@ import RxSwift
 import RxMoya
 import Realm
 
-enum AccountError: Error {
-    case inValidRequest
-    case inValidInput
+enum SignUpError: String, Error {
+    case inValidRequest = "필수값을 채워주세요."
+    case inValidInput = "중복된 계정입니다."
 }
 
 enum inValidEmailError: String, Error {
@@ -21,35 +21,48 @@ enum inValidEmailError: String, Error {
     case inValidEmail = "중복된 아이디입니다."
 }
 
+enum SignInError: String, Error {
+    case inValidInput = "필수값을 채워주세요."
+    case inValidAccount = "계정을 확인해주세요."
+}
+
+enum RefreshTokenError: String, Error {
+    case inValidToken
+    case forbidden
+    case inExpiredToken
+    case expiredRefreshToken
+}
+
 final class AccountManager {
     
     static let shared = AccountManager()
     
     private let provider = MoyaProvider<LSLPAPI>()
-    private let disposeBag = DisposeBag()
     
     private init() { }
     
-    func signUp(email: String, password: String, nick: String, phoneNum: String?, birthDay: String?, completion: @escaping (Result<SignUpResponse, Error>) -> Void) {
+    func signUp(email: String, password: String, nick: String, phoneNum: String?, birthDay: String?, completion: @escaping (Result<SignUpResponse, SignUpError>) -> Void) {
         
         let data = Account(email: email, password: password, nick: nick, phoneNum: phoneNum, birthDay: birthDay)
         
-                        
-            provider.rx.request(.signUp(model: data)).subscribe { result in
-                switch result {
-                case .success(let response):
-                    print("success", response.statusCode, response.data)
-                    
-                    guard let value = try? JSONDecoder().decode(SignUpResponse.self, from: response.data) else {
-                        return
-                    }
-                    completion(.success(value))
-                case .failure(let error):
-                    print("error", error)
-                    completion(.failure(error))
+        provider.request(.signUp(model: data)) { result in
+            switch result {
+            case .success(let response):
+                print("success", response.statusCode, response.data)
+                
+                guard let value = try? JSONDecoder().decode(SignUpResponse.self, from: response.data) else {
+                    return
+                }
+                completion(.success(value))
+            case .failure(let error):
+                print("error", error)
+                if email.isEmpty || password.isEmpty || nick.isEmpty {
+                    completion(.failure(.inValidInput))
+                } else {
+                    completion(.failure(.inValidRequest))
                 }
             }
-            .disposed(by: disposeBag)
+        }
         
     }
     
@@ -77,20 +90,27 @@ final class AccountManager {
             
         
     }
-//    
-//    func signIn(email: String, password: String) {
-//        provider.request(.signIn(email: email, password: password)) { result in
-//            switch result {
-//            case .success(_):
-//                <#code#>
-//            case .failure(_):
-//                <#code#>
-//            }
-//        }
-//    }
-//    
+    
+    func signIn(email: String, password: String, completion: @escaping (Result<Token, SignInError>) -> Void) {
+        provider.request(.signIn(email: email, password: password)) { result in
+            switch result {
+            case .success(let response):
+                guard let value = try? JSONDecoder().decode(Token.self, from: response.data) else {
+                    return
+                }
+                completion(.success(value))
+            case .failure(_):
+                if email.isEmpty || password.isEmpty {
+                    completion(.failure(.inValidInput))
+                } else {
+                    completion(.failure(.inValidAccount))
+                }
+            }
+        }
+    }
+    
 //    func refreshToken() {
-//        provider.request(.refreshToken) { result in
+//        provider.request(.refreshToken(token: <#T##String#>, refreshToken: <#T##String#>)) { result in
 //            switch result {
 //            case .success(_):
 //                <#code#>
