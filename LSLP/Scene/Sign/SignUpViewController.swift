@@ -136,23 +136,19 @@ final class SignUpViewController: BaseViewController {
     
     @objc
     private func backButtonPressed() {
-        isAnyInput
-            .subscribe(with: self, onNext: { owner, value in
-                if value {
-                    print("input")
-                    let alert = UIAlertController(title: "회원가입을 그만두시겠습니까?", message: "입력된 값들은 사라집니다.", preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "확인", style: .cancel) { _ in
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                    alert.addAction(ok)
-                    self.present(alert, animated: true)
-                    owner.isAnyInput.onCompleted()
-                } else {
-                    print("noinput")
-                    self.navigationController?.popViewController(animated: true)
-                }
-            })
-            .disposed(by: disposeBag)
+        if isAnyInput.value {
+            print("input")
+            let alert = UIAlertController(title: "회원가입을 그만두시겠습니까?", message: "입력된 값들은 사라집니다.", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "확인", style: .cancel) { _ in
+                self.navigationController?.popViewController(animated: true)
+            }
+            alert.addAction(ok)
+            self.present(alert, animated: true)
+        } else {
+            print("noinput")
+            self.navigationController?.popViewController(animated: true)
+        }
+
     }
     
     var userID = PublishSubject<String>()
@@ -162,7 +158,7 @@ final class SignUpViewController: BaseViewController {
     var userPhoneNum = PublishSubject<String>()
     var userBirth = PublishSubject<String>()
     
-    var isAnyInput = BehaviorSubject(value: false)
+    var isAnyInput = BehaviorRelay(value: false)
     var dataCheck = BehaviorSubject(value: false)
     var pwCheck = BehaviorSubject(value: false)
     
@@ -198,9 +194,7 @@ final class SignUpViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         anyInput
-            .subscribe(with: self, onNext: { owner, value in
-                owner.isAnyInput.onNext(value)
-            })
+            .bind(to: isAnyInput)
             .disposed(by: disposeBag)
         
         idTextField.rx.text.orEmpty
