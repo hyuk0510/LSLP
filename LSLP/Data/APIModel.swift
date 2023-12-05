@@ -25,12 +25,21 @@ struct SignUpResponse: Decodable {
     let nick: String
 }
 
-struct Token: Decodable {
+struct SignInResult: Decodable {
     let _id: String
     let token: String
     let refreshToken: String
 }
 
+struct AccountToken: Decodable {
+    let token: String
+}
+
 struct RequestMessage: Decodable {
     let message: String
+}
+
+class Token {
+    static var token: String?
+    static var refreshToken: String?
 }

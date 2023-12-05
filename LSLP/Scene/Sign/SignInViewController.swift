@@ -64,15 +64,17 @@ final class SignInViewController: BaseViewController {
         AccountManager.shared.signIn(email: idTextField.text ?? "", password: pwTextField.text ?? "") { result in
             switch result {
             case .success(let success):
-                let vc = MainViewController()
+                let vc = TabBarController()
                 vc.modalPresentationStyle = .fullScreen
                 
-                UserDefaults.standard.setValue(success.token, forKey: "Token")
-                UserDefaults.standard.setValue(success.refreshToken, forKey: "RefreshToken")
+                Token.token = success.token
+                Token.refreshToken = success.refreshToken
+//                UserDefaults.standard.setValue(success.token, forKey: "Token")
+//                UserDefaults.standard.setValue(success.refreshToken, forKey: "RefreshToken")
                 
                 //                UserDefaults.standard.setValue(idTextField.text, forKey: "UserID")
                 //                UserDefaults.standard.setValue(pwTextField, forKey: "UserPW")
-                vc.label.text = "\(success._id)\n\(success.token)\n\(success.refreshToken)"
+                
                 self.present(vc, animated: true)
             case .failure(let failure):
                 self.showAlert(title: failure.rawValue, message: nil)
@@ -94,6 +96,13 @@ final class SignInViewController: BaseViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        idTextField.text = nil
+        pwTextField.text = nil
     }
     
     func bind() {

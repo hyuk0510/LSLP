@@ -7,8 +7,6 @@
 
 import Foundation
 import Moya
-import RxSwift
-import RxMoya
 import Realm
 
 enum SignUpError: String, Error {
@@ -33,11 +31,20 @@ enum RefreshTokenError: String, Error {
     case expiredRefreshToken
 }
 
+enum WithDrawError: String, Error {
+    case inValidToken
+    case forbidden
+    case expiredToken
+}
+
 final class AccountManager {
     
     static let shared = AccountManager()
     
-    private let provider = MoyaProvider<LSLPAPI>()
+//    let plugIn = AccessTokenPlugin { _ in
+//        Token.token ?? ""
+//    }
+    private lazy var provider = MoyaProvider<LSLPAPI>()//plugins: [plugIn])
     
     private init() { }
     
@@ -91,11 +98,11 @@ final class AccountManager {
         
     }
     
-    func signIn(email: String, password: String, completion: @escaping (Result<Token, SignInError>) -> Void) {
+    func signIn(email: String, password: String, completion: @escaping (Result<SignInResult, SignInError>) -> Void) {
         provider.request(.signIn(email: email, password: password)) { result in
             switch result {
             case .success(let response):
-                guard let value = try? JSONDecoder().decode(Token.self, from: response.data) else {
+                guard let value = try? JSONDecoder().decode(SignInResult.self, from: response.data) else {
                     return
                 }
                 completion(.success(value))
@@ -109,20 +116,34 @@ final class AccountManager {
         }
     }
     
-//    func refreshToken() {
-//        provider.request(.refreshToken(token: <#T##String#>, refreshToken: <#T##String#>)) { result in
-//            switch result {
-//            case .success(_):
-//                <#code#>
-//            case .failure(_):
-//                <#code#>
-//            }
-//        }
-//    }
-//    
-//    
+    func refreshToken(completion: @escaping (RefreshTokenError) -> Void) {
+        provider.request(.refreshToken(token: Token.token ?? "", refreshToken: Token.refreshToken ?? "")) { result in
+            switch result {
+            case .success(let response):
+                print("REFRESH")
+                guard let value = try? JSONDecoder().decode(AccountToken.self, from: response.data) else {
+                    return
+                }
+                
+                Token.token = value.token
+            case .failure(let error):
+                
+                print(error.response?.statusCode)
+                
+                guard let response = error.response else {
+                    return
+                }
+                
+                if response.statusCode == 418 {
+                    completion(.expiredRefreshToken)
+                }
+            }
+        }
+    }
+    
+    
 //    func withdraw() {
-//        provider.request(.withdraw) { result in
+//        provider.request(.withdraw(token: Token().token ?? "")) { result in
 //            switch result {
 //            case .success(let value):
 //                

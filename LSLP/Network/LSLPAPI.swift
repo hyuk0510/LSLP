@@ -24,9 +24,20 @@ enum LSLPAPI {
     
 }
 
-extension LSLPAPI: TargetType {
+extension LSLPAPI: TargetType {//}, AccessTokenAuthorizable {
+//    var authorizationType: Moya.AuthorizationType? {
+//        switch self {
+//        case .signUp(model: _), .isValidEmail(email: _), .signIn(email: _, password: _):
+//            return nil
+//        case .refreshToken(token: _, refreshToken: _):
+//            return .basic
+//        case .withdraw(token: _):
+//            return .bearer
+//        }
+//    }
+    
     var baseURL: URL {
-        guard let url = URL(string: LSLPURL.url) else {
+        guard let url = URL(string: LSLPURL.testURL) else {
             fatalError()
         }
         return url
