@@ -20,6 +20,24 @@ struct Login: Encodable {
     let password: String
 }
 
+struct Post: Encodable {
+    let title: String?
+    let content: String?
+    let file: Data?
+    let product_id: String?
+    let content1: String?
+    let content2: String?
+    let content3: String?
+    let content4: String?
+    let content5: String?
+}
+
+struct SearchPost: Encodable {
+    let next: String?
+    let limit: String?
+    let product_id: String?
+}
+
 struct SignUpResponse: Decodable {
     let email: String
     let nick: String
@@ -37,9 +55,4 @@ struct AccountToken: Decodable {
 
 struct RequestMessage: Decodable {
     let message: String
-}
-
-class Token {
-    static var token: String?
-    static var refreshToken: String?
 }

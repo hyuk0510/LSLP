@@ -16,25 +16,31 @@ enum LSLPError: Error {
 }
 
 enum LSLPAPI {
+    // Account
     case signUp(model: Account)
     case isValidEmail(email: String)
     case signIn(email: String, password: String)
-    case refreshToken(token: String, refreshToken: String)
-    case withdraw(token: String)
+    case refreshToken
+    case withdraw
     
+    // Post
+    case uploadPost(model: Post)
+//    case searchPost(model: SearchPost)
+//    case changePost(_id: String, model: Post)
+//    case removePost(_id: String)
+//    case searchUserPost(_id: String, model: SearchPost)
 }
 
-extension LSLPAPI: TargetType {//}, AccessTokenAuthorizable {
-//    var authorizationType: Moya.AuthorizationType? {
-//        switch self {
-//        case .signUp(model: _), .isValidEmail(email: _), .signIn(email: _, password: _):
-//            return nil
-//        case .refreshToken(token: _, refreshToken: _):
-//            return .basic
-//        case .withdraw(token: _):
-//            return .bearer
-//        }
-//    }
+extension LSLPAPI: TargetType, AccessTokenAuthorizable {
+    
+    var authorizationType: Moya.AuthorizationType? {
+        switch self {
+        case .signUp(_), .isValidEmail(_):
+            return .none
+        case .signIn(_, _), .refreshToken, .withdraw, .uploadPost(_):
+            return .bearer
+        }
+    }
     
     var baseURL: URL {
         guard let url = URL(string: LSLPURL.testURL) else {
@@ -55,12 +61,14 @@ extension LSLPAPI: TargetType {//}, AccessTokenAuthorizable {
             return "refresh"
         case .withdraw:
             return "withdraw"
+        case .uploadPost(model: _):
+            return "post"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .signUp(model: _), .isValidEmail(email: _), .signIn(email: _, password: _):
+        case .signUp(model: _), .isValidEmail(email: _), .signIn(email: _, password: _), .uploadPost(model: _):
             return .post
         case .refreshToken, .withdraw:
             return .get
@@ -76,6 +84,8 @@ extension LSLPAPI: TargetType {//}, AccessTokenAuthorizable {
         case .signIn(let email, let password):
             let data = Login(email: email, password: password)
             return .requestJSONEncodable(data)
+        case .uploadPost(let model):
+            return .requestJSONEncodable(model)
         case .refreshToken, .withdraw:
             return .requestPlain
         }
@@ -89,16 +99,15 @@ extension LSLPAPI: TargetType {//}, AccessTokenAuthorizable {
                 "SesacKey" : "\(APIKey.key)"
             ]
        
-        case .refreshToken(let token, let refreshToken):
+        case .refreshToken, .withdraw:
             return [
-                "Authorization" : "\(token)",
-                "Refresh" : "\(refreshToken)",
                 "SesacKey" : "\(APIKey.key)"
                 
             ]
-        case .withdraw(let token):
+        
+        case .uploadPost(_):
             return [
-                "Authorization" : "\(token)",
+                "Content-Type" : "",
                 "SesacKey" : "\(APIKey.key)"
             ]
         }

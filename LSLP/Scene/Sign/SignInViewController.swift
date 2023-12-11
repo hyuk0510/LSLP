@@ -65,17 +65,14 @@ final class SignInViewController: BaseViewController {
             switch result {
             case .success(let success):
                 let vc = TabBarController()
-                vc.modalPresentationStyle = .fullScreen
+                vc.navigationItem.hidesBackButton = true
                 
-                Token.token = success.token
-                Token.refreshToken = success.refreshToken
-//                UserDefaults.standard.setValue(success.token, forKey: "Token")
-//                UserDefaults.standard.setValue(success.refreshToken, forKey: "RefreshToken")
+                UserDefaults.standard.setValue(success.token, forKey: "Token")
+                UserDefaults.standard.setValue(success.refreshToken, forKey: "RefreshToken")
                 
                 //                UserDefaults.standard.setValue(idTextField.text, forKey: "UserID")
                 //                UserDefaults.standard.setValue(pwTextField, forKey: "UserPW")
-                
-                self.present(vc, animated: true)
+                self.navigationController?.pushViewController(vc, animated: true)
             case .failure(let failure):
                 self.showAlert(title: failure.rawValue, message: nil)
             }
@@ -140,4 +137,5 @@ final class SignInViewController: BaseViewController {
             make.centerX.equalTo(view.snp.centerX)
         }
     }
+    
 }

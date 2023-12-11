@@ -10,18 +10,6 @@ import RxSwift
 
 extension UIViewController {
     
-//    func presentAlert(title: String?, message: String?) -> Observable<Void> {
-//            let result = PublishSubject<Void>()
-//            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//            let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-//                result.onCompleted()
-//            }
-//            alert.addAction(cancel)
-//            present(alert, animated: true)
-//        
-//            return result
-//    }
-    
     func showAlert(title: String, message: String?)  {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let ok = UIAlertAction(title: "확인", style: .cancel)
@@ -29,5 +17,17 @@ extension UIViewController {
         alert.addAction(ok)
         
         self.present(alert, animated: true)
+    }
+    
+    func pushToTabBarController() {
+        let vc = TabBarController()
+        vc.navigationItem.hidesBackButton = true
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func pushToSignInViewController() {
+        let vc = SignInViewController()
+        vc.navigationItem.hidesBackButton = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

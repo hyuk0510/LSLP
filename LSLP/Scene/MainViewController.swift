@@ -19,23 +19,7 @@ final class MainViewController: BaseViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        label.text = "\(Token.token)\n\(Token.refreshToken)"
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        AccountManager.shared.refreshToken { response in
-            
-            let alert = UIAlertController(title: "로그인 세션이 만료되었습니다.", message: "다시 로그인 해주세요", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "확인", style: .cancel) { _ in
-                self.dismiss(animated: true)
-            }
-            
-            alert.addAction(ok)
-            
-            self.present(alert, animated: true)
-        }
+        label.text = "\(UserDefaults.standard.string(forKey: "Token"))\n\(UserDefaults.standard.string(forKey: "RefreshToken"))"
     }
     
     override func configure() {
@@ -48,4 +32,5 @@ final class MainViewController: BaseViewController {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
     }
+    
 }

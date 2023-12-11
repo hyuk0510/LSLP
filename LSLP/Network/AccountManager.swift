@@ -8,43 +8,16 @@
 import Foundation
 import Moya
 import Realm
-
-enum SignUpError: String, Error {
-    case inValidRequest = "필수값을 채워주세요."
-    case inValidInput = "중복된 계정입니다."
-}
-
-enum inValidEmailError: String, Error {
-    case inValidInput = "이메일을 입력해주세요."
-    case inValidEmail = "중복된 아이디입니다."
-}
-
-enum SignInError: String, Error {
-    case inValidInput = "필수값을 채워주세요."
-    case inValidAccount = "계정을 확인해주세요."
-}
-
-enum RefreshTokenError: String, Error {
-    case inValidToken
-    case forbidden
-    case inExpiredToken
-    case expiredRefreshToken
-}
-
-enum WithDrawError: String, Error {
-    case inValidToken
-    case forbidden
-    case expiredToken
-}
+import Alamofire
 
 final class AccountManager {
     
     static let shared = AccountManager()
     
-//    let plugIn = AccessTokenPlugin { _ in
-//        Token.token ?? ""
+//    private let authPlugin = AccessTokenPlugin { _ in
+//        UserDefaults.standard.string(forKey: "Token") ?? ""
 //    }
-    private lazy var provider = MoyaProvider<LSLPAPI>()//plugins: [plugIn])
+    private lazy var provider = MoyaProvider<LSLPAPI>(session: Session(interceptor: Interceptor.shared))//, plugins: [authPlugin])
     
     private init() { }
     
@@ -116,27 +89,32 @@ final class AccountManager {
         }
     }
     
-    func refreshToken(completion: @escaping (RefreshTokenError) -> Void) {
-        provider.request(.refreshToken(token: Token.token ?? "", refreshToken: Token.refreshToken ?? "")) { result in
+    func refreshToken(completion: @escaping (Result<AccountToken, RefreshTokenError>) -> Void) {
+        provider.request(.refreshToken) { result in
             switch result {
             case .success(let response):
-                print("REFRESH")
                 guard let value = try? JSONDecoder().decode(AccountToken.self, from: response.data) else {
                     return
                 }
                 
-                Token.token = value.token
+                completion(.success(value))
             case .failure(let error):
-                
-                print(error.response?.statusCode)
                 
                 guard let response = error.response else {
                     return
                 }
                 
-                if response.statusCode == 418 {
-                    completion(.expiredRefreshToken)
+                switch response.statusCode {
+                case 409:
+                    completion(.failure(.inExpiredToken))
+                case 418:
+                    completion(.failure(.expiredRefreshToken))
+                case 401:
+                    completion(.failure(.inValidToken))
+                default:
+                    completion(.failure(.forbidden))
                 }
+
             }
         }
     }

@@ -151,23 +151,23 @@ final class SignUpViewController: BaseViewController {
 
     }
     
-    var userID = PublishSubject<String>()
-    var userPW = PublishSubject<String>()
-    var userPWCheck = PublishSubject<String>()
-    var userNick = PublishSubject<String>()
-    var userPhoneNum = PublishSubject<String>()
-    var userBirth = PublishSubject<String>()
+    var userID = PublishRelay<String>()
+    var userPW = PublishRelay<String>()
+    var userPWCheck = PublishRelay<String>()
+    var userNick = PublishRelay<String>()
+    var userPhoneNum = PublishRelay<String>()
+    var userBirth = PublishRelay<String>()
     
     var isAnyInput = BehaviorRelay(value: false)
-    var dataCheck = BehaviorSubject(value: false)
-    var pwCheck = BehaviorSubject(value: false)
+    var dataCheck = BehaviorRelay(value: false)
+    var pwCheck = BehaviorRelay(value: false)
     
     let disposeBag = DisposeBag()
     
     private func bind() {
         
-        let validation = Observable.combineLatest(idTextField.rx.text.orEmpty, pwTextField.rx.text.orEmpty, nickTextField.rx.text.orEmpty) { id, pw, nick in
-            return id.count > 0 && pw.count > 0 && nick.count > 0
+        let validation = Observable.combineLatest(idTextField.rx.text.orEmpty, pwTextField.rx.text.orEmpty, pwCheckTextField.rx.text.orEmpty, nickTextField.rx.text.orEmpty) {
+            return !($0.isEmpty || $1.isEmpty || $2.isEmpty || $3.isEmpty)
         }
         
         let pwValidation = Observable.combineLatest(pwTextField.rx.text.orEmpty, pwCheckTextField.rx.text.orEmpty) { pw, pwCheck in
@@ -177,20 +177,17 @@ final class SignUpViewController: BaseViewController {
         let anyInput = Observable.combineLatest(idTextField.rx.text.orEmpty, pwTextField.rx.text.orEmpty, pwCheckTextField.rx.text.orEmpty, nickTextField.rx.text.orEmpty, birthDayTextField.rx.text.orEmpty) {
             return !($0.isEmpty && $1.isEmpty && $2.isEmpty && $3.isEmpty && $4.isEmpty)
         }
-            
-        var check = false
-        var pwCheck = false
         
         validation
-            .bind { value in
-                check = value
-            }
+            .subscribe(with: self, onNext: { owner, value in
+                owner.dataCheck.accept(value)
+            })
             .disposed(by: disposeBag)
         
         pwValidation
-            .bind { value in
-                pwCheck = value
-            }
+            .subscribe(with: self, onNext: { owner, value in
+                owner.pwCheck.accept(value)
+            })
             .disposed(by: disposeBag)
         
         anyInput
@@ -199,38 +196,38 @@ final class SignUpViewController: BaseViewController {
         
         idTextField.rx.text.orEmpty
             .subscribe(with: self) { owner, value in
-                owner.userID.onNext(value)
+                owner.userID.accept(value)
             } onDisposed: { _ in
             }
             .disposed(by: disposeBag)
         
         pwTextField.rx.text.orEmpty
             .subscribe(with: self) { owner, value in
-                owner.userPW.onNext(value)
+                owner.userPW.accept(value)
             }
             .disposed(by: disposeBag)
         
         pwCheckTextField.rx.text.orEmpty
             .subscribe(with: self) { owner, value in
-                owner.userPWCheck.onNext(value)
+                owner.userPWCheck.accept(value)
             }
             .disposed(by: disposeBag)
         
         nickTextField.rx.text.orEmpty
             .subscribe(with: self) { owner, value in
-                owner.userNick.onNext(value)
+                owner.userNick.accept(value)
             }
             .disposed(by: disposeBag)
         
         phoneNumTextField.rx.text.orEmpty
             .subscribe(with: self) { owner, value in
-                owner.userPhoneNum.onNext(value)
+                owner.userPhoneNum.accept(value)
             }
             .disposed(by: disposeBag)
         
         birthDayTextField.rx.text.orEmpty
             .subscribe(with: self) { owner, value in
-                owner.userBirth.onNext(value)
+                owner.userBirth.accept(value)
             }
             .disposed(by: disposeBag)
         
@@ -262,7 +259,7 @@ final class SignUpViewController: BaseViewController {
         signUpButton.rx.tap
             .subscribe(with: self) { owner, value in
                 owner.checkValidation()
-                pwCheck ? check ? owner.signUp() : owner.showAlert(title: "필수 입력 정보가 누락되어있습니다.", message: nil) : owner.showAlert(title: "비밀번호와 비밀번호 확인 입력이 일치하지 않습니다.", message: nil)
+                owner.pwCheck.value ? (owner.dataCheck.value ? owner.signUp() : owner.showAlert(title: "필수 입력 정보가 누락되어있습니다.", message: nil)) : owner.showAlert(title: "비밀번호와 비밀번호 확인 입력이 일치하지 않습니다.", message: nil)
             }
             .disposed(by: disposeBag)
     }
@@ -284,6 +281,15 @@ final class SignUpViewController: BaseViewController {
                 let borderColor = value ? UIColor.black.cgColor : UIColor.red.cgColor
                 
                 owner.pwTextField.layer.borderColor = borderColor
+            }
+            .disposed(by: disposeBag)
+        
+        pwCheckTextField.rx.text.orEmpty
+            .map { $0.count > 0 }
+            .subscribe(with: self) { owner, value in
+                let borderColor = value ? UIColor.black.cgColor : UIColor.red.cgColor
+                
+                owner.pwCheckTextField.layer.borderColor = borderColor
             }
             .disposed(by: disposeBag)
         

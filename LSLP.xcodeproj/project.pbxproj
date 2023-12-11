@@ -41,6 +41,9 @@
 		D82E59FE2B1CAD290042294C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E59FD2B1CAD290042294C /* MainViewController.swift */; };
 		D82E5A032B1CC9B20042294C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E5A022B1CC9B20042294C /* TabBarController.swift */; };
 		D82E5A052B1CCA270042294C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E5A042B1CCA270042294C /* UserProfileViewController.swift */; };
+		D82E5A072B21D9B50042294C /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E5A062B21D9B50042294C /* Interceptor.swift */; };
+		D82E5A0F2B21F7E00042294C /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E5A0E2B21F7E00042294C /* SplashViewController.swift */; };
+		D88FCCD22B27060200DF360A /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88FCCD12B27060200DF360A /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +93,9 @@
 		D82E59FD2B1CAD290042294C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D82E5A022B1CC9B20042294C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		D82E5A042B1CCA270042294C /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		D82E5A062B21D9B50042294C /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
+		D82E5A0E2B21F7E00042294C /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		D88FCCD12B27060200DF360A /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +193,8 @@
 			children = (
 				D822BAA92B0FA1DB00371FAC /* LSLPAPI.swift */,
 				D822B9DD2B06342A00371FAC /* AccountManager.swift */,
+				D82E5A062B21D9B50042294C /* Interceptor.swift */,
+				D88FCCD12B27060200DF360A /* NetworkError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -198,6 +206,7 @@
 				D82E59FD2B1CAD290042294C /* MainViewController.swift */,
 				D82E5A022B1CC9B20042294C /* TabBarController.swift */,
 				D82E5A042B1CCA270042294C /* UserProfileViewController.swift */,
+				D82E5A0E2B21F7E00042294C /* SplashViewController.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -407,8 +416,11 @@
 				D822BAAA2B0FA1DB00371FAC /* LSLPAPI.swift in Sources */,
 				D822B9CD2B0627D800371FAC /* SignInViewController.swift in Sources */,
 				D82E59FE2B1CAD290042294C /* MainViewController.swift in Sources */,
+				D88FCCD22B27060200DF360A /* NetworkError.swift in Sources */,
 				D822B9DC2B0630B400371FAC /* APIModel.swift in Sources */,
 				D82E5A032B1CC9B20042294C /* TabBarController.swift in Sources */,
+				D82E5A072B21D9B50042294C /* Interceptor.swift in Sources */,
+				D82E5A0F2B21F7E00042294C /* SplashViewController.swift in Sources */,
 				D822B9E52B08E7DF00371FAC /* BaseViewController.swift in Sources */,
 				D822B9DE2B06342A00371FAC /* AccountManager.swift in Sources */,
 				D822B9EF2B09022300371FAC /* Date+Extension.swift in Sources */,
